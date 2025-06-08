@@ -1,12 +1,14 @@
 package br.com.condomineolite.models;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name= "persons")
+@Data
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type_person", discriminatorType = DiscriminatorType.STRING)
 public abstract class Person {
