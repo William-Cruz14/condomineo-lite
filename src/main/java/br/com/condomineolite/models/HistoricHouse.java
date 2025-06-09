@@ -20,7 +20,7 @@ public class HistoricHouse {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "person_id", nullable = false)
-    private Person person;
+    private Resident resident;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "apartment_id", nullable = false)

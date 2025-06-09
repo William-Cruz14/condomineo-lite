@@ -13,6 +13,9 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class Visitor extends Person {
 
+    @Column(nullable = false, unique = true)
+    private String document;
+
     @OneToMany(
             mappedBy = "visitor", cascade = CascadeType.ALL,
             orphanRemoval = true, fetch = FetchType.LAZY

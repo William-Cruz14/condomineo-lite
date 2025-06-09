@@ -28,4 +28,9 @@ public class Space {
             orphanRemoval = true
     )
     private List<Reserve> reserves = new ArrayList<>();
+
+    public void addReserve(Reserve reserve) {
+        reserves.add(reserve);
+        reserve.setSpace(this);
+    }
 }

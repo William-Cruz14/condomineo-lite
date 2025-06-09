@@ -16,7 +16,7 @@ public class Resident  extends Person {
     @Column(nullable = false, unique = true)
     private String document;
 
-    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "resident", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<HistoricHouse> historicHouses = new ArrayList<>();
 
     @OneToMany(

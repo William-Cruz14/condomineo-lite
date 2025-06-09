@@ -12,11 +12,13 @@ public class VehicleResponseDTO {
     private String plate;
     private String model;
     private String color;
+    private Long ownerId;
 
     public VehicleResponseDTO(Vehicle vehicle) {
         this.id = vehicle.getId();
         this.plate = vehicle.getPlate();
         this.model = vehicle.getModel();
         this.color = vehicle.getColor();
+        this.ownerId = vehicle.getOwner().getId();
     }
 }

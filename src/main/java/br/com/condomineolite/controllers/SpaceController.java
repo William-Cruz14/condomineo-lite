@@ -1,8 +1,8 @@
 package br.com.condomineolite.controllers;
 
-import br.com.condomineolite.dtos.order.OrderRequestDTO;
-import br.com.condomineolite.dtos.order.OrderResponseDTO;
-import br.com.condomineolite.services.OrderService;
+import br.com.condomineolite.dtos.space.SpaceRequestDTO;
+import br.com.condomineolite.dtos.space.SpaceResponseDTO;
+import br.com.condomineolite.services.SpaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,43 +13,42 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("api/orders")
-public class OrderController {
+@RequestMapping("api/spaces")
+public class SpaceController {
 
     @Autowired
-    private OrderService orderService;
+    private SpaceService spaceService;
 
     @GetMapping
-    public ResponseEntity<Page<OrderResponseDTO>> findAll(Pageable pageable) {
-        Page<OrderResponseDTO> orders = orderService.findAll(pageable);
-        return ResponseEntity.ok(orders);
+    public ResponseEntity<Page<SpaceResponseDTO>> findAll(Pageable pageable) {
+        return ResponseEntity.ok(spaceService.findAll(pageable));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<OrderResponseDTO> findById(@PathVariable Long id) {
-        return orderService.findById(id)
+    public ResponseEntity<SpaceResponseDTO> findById(@PathVariable Long id) {
+        return spaceService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<OrderResponseDTO> create(@RequestBody OrderRequestDTO dto) {
-        OrderResponseDTO order = orderService.create(dto);
+    public ResponseEntity<SpaceResponseDTO> create(@RequestBody SpaceRequestDTO dto) {
+        SpaceResponseDTO response = spaceService.create(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(order.getId()).toUri();
-        return ResponseEntity.created(uri).body(order);
+                .buildAndExpand(response.getId()).toUri();
+        return ResponseEntity.created(uri).body(response);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<OrderResponseDTO> update(@PathVariable Long id, @RequestBody OrderRequestDTO dto) {
-        return orderService.update(id, dto)
+    public ResponseEntity<SpaceResponseDTO> update(@PathVariable Long id, @RequestBody SpaceRequestDTO dto) {
+        return spaceService.update(id, dto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        if (orderService.delete(id)) {
+        if (spaceService.delete(id)) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
